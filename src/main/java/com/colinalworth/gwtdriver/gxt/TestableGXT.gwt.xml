@@ -1,0 +1,5 @@
+<module>
+    <inherits name="com.sencha.gxt.widget.core.Core" />
+    <inherits name="com.colinalworth.gwtdriver.GwtDriver" />
+    <entry-point class="com.colinalworth.gwtdriver.gxt.client.GxtMethods" />
+</module>
