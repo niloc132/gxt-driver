@@ -23,8 +23,11 @@ package com.colinalworth.gwtdriver.gxt.models;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.HasInputDevices;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.internal.Coordinates;
+import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.pagefactory.ByChained;
 
 import com.colinalworth.gwtdriver.by.ByWidget;
@@ -50,7 +53,20 @@ public class Menu extends GwtWidget<MenuFinder> {
 		public Menu done() {
 			List<WebElement> allMenus = driver.findElements(new ByChained(By.xpath("//body/*"),
 					new ByWidget(driver, com.sencha.gxt.widget.core.client.menu.Menu.class)));
+			assert allMenus.size() != 0 : "No menus seem to be visible!";
+			assert allMenus.size() > depth : "There are only " + allMenus.size() + " menus visible!";
 			return new Menu(driver, allMenus.get(allMenus.size() - 1 - depth));
 		}
+	}
+
+	public Menu mouseOver(String text) {
+		WebElement elt = getElement().findElement(By.xpath(".//*[contains(text(),'"+text+"')]"));
+		Coordinates loc = ((Locatable)elt).getCoordinates();
+		((HasInputDevices)getDriver()).getMouse().mouseMove(loc);
+		return new MenuFinder().atTop().withDriver(getDriver()).done();
+	}
+
+	public void click(String text) {
+		getElement().findElement(By.xpath(".//*[contains(text(), '"+text+"')]")).click();
 	}
 }
