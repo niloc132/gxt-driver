@@ -36,7 +36,9 @@ import com.colinalworth.gwtdriver.by.FasterByChained;
 import com.colinalworth.gwtdriver.gxt.models.Window.WindowFinder;
 import com.colinalworth.gwtdriver.models.GwtWidget;
 import com.colinalworth.gwtdriver.models.GwtWidgetFinder;
+import com.colinalworth.gwtdriver.models.GwtWidget.ForWidget;
 
+@ForWidget(com.sencha.gxt.widget.core.client.Window.class)
 public class Window extends GwtWidget<WindowFinder> {
 	public Window(WebDriver driver, WebElement element) {
 		super(driver, element);
@@ -61,10 +63,12 @@ public class Window extends GwtWidget<WindowFinder> {
 		@Override
 		public Window done() {
 			if (heading != null) {
-				String escaped = heading;
+				String escaped = escapeToString(heading);
+				//TODO the first two clauses can be a ByChained, then iterate over items and see if
+				//it matches the contains(), if so, just return the starting point
 				elt = driver.findElement(new FasterByChained(By.xpath("//body/*"),
 								new ByWidget(driver, com.sencha.gxt.widget.core.client.Window.class), 
-								By.xpath(".//*[contains(text(), '" + escaped + "')]"), 
+								By.xpath(".//*[contains(text(), " + escaped + ")]"), 
 								new ByNearestWidget(driver, com.sencha.gxt.widget.core.client.Window.class)));
 			} else if (atTop) {
 				//TODO totally untested

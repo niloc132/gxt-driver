@@ -58,8 +58,8 @@ public class Button extends GwtWidget<ButtonFinder> {
 		@Override
 		public Button done() {
 			if (text != null) {
-				String escaped = text;
-				withElement(driver.findElement(new CheatingByChained(By.xpath("//*[contains(text(),'"+escaped+"')]"), new ByNearestWidget(driver, CellButtonBase.class))));
+				String escaped = escapeToString(text);
+				withElement(driver.findElement(new CheatingByChained(By.xpath("//*[contains(text(),"+escaped+")]"), new ByNearestWidget(driver, CellButtonBase.class))));
 			}
 			return new Button(driver, elt);
 		}

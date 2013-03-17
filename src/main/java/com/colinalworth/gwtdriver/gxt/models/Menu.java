@@ -60,7 +60,8 @@ public class Menu extends GwtWidget<MenuFinder> {
 	}
 
 	public Menu mouseOver(String text) {
-		WebElement elt = getElement().findElement(By.xpath(".//*[contains(text(),'"+text+"')]"));
+		String escaped = escapeToString(text);
+		WebElement elt = getElement().findElement(By.xpath(".//*[contains(text(),"+escaped+")]"));
 		Coordinates loc = ((Locatable)elt).getCoordinates();
 		((HasInputDevices)getDriver()).getMouse().mouseMove(loc);
 		return new MenuFinder().atTop().withDriver(getDriver()).done();

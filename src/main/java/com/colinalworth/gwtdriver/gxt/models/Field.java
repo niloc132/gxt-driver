@@ -61,7 +61,8 @@ public class Field extends GwtWidget<FieldFinder> {
 		@Override
 		public Field done() {
 			if (fieldLabel != null) {
-				elt = elt.findElement(new FasterByChained(By.xpath(".|.//*[contains(text(), '"+fieldLabel+"')]"),
+				String escaped = escapeToString(fieldLabel);
+				elt = elt.findElement(new FasterByChained(By.xpath(".|.//*[contains(text(), "+escaped+")]"),
 						new ByNearestWidget(driver, FieldLabel.class),
 						new FasterByChained(
 								By.xpath("*|*/*"),

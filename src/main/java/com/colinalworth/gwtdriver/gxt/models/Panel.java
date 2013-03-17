@@ -49,8 +49,9 @@ public class Panel extends GwtWidget<PanelFinder> {
 		@Override
 		public Panel done() {
 			if (heading != null) {
+				String escapedString = escapeToString(heading);
 				elt = elt.findElement(
-						new FasterByChained(By.xpath(".//*[contains(text(), '"+heading+"')]"),
+						new FasterByChained(By.xpath(".//*[contains(text(), "+escapedString+")]"),
 						new ByNearestWidget(driver, ContentPanel.class)));
 			}
 			return new Panel(driver, elt);
