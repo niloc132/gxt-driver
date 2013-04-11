@@ -1,4 +1,4 @@
-package com.colinalworth.gwtdriver.gxt.models;
+package org.senchalabs.gwt.gwtdriver.gxt.models;
 
 /*
  * #%L
@@ -23,12 +23,12 @@ package com.colinalworth.gwtdriver.gxt.models;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
+import org.senchalabs.gwt.gwtdriver.by.CheatingByChained;
+import org.senchalabs.gwt.gwtdriver.gxt.models.Button.ButtonFinder;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
-import com.colinalworth.gwtdriver.by.ByNearestWidget;
-import com.colinalworth.gwtdriver.by.CheatingByChained;
-import com.colinalworth.gwtdriver.gxt.models.Button.ButtonFinder;
-import com.colinalworth.gwtdriver.models.GwtWidget;
-import com.colinalworth.gwtdriver.models.GwtWidgetFinder;
 import com.sencha.gxt.widget.core.client.button.CellButtonBase;
 
 public class Button extends GwtWidget<ButtonFinder> {

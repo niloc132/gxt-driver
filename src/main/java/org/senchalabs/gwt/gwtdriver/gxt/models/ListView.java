@@ -1,4 +1,4 @@
-package com.colinalworth.gwtdriver.gxt.models;
+package org.senchalabs.gwt.gwtdriver.gxt.models;
 
 /*
  * #%L
@@ -23,9 +23,8 @@ package com.colinalworth.gwtdriver.gxt.models;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import com.colinalworth.gwtdriver.models.GwtWidget;
-import com.colinalworth.gwtdriver.models.GwtWidgetFinder;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
 public class ListView extends GwtWidget<GwtWidgetFinder<ListView>> {
 

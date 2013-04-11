@@ -1,4 +1,4 @@
-package com.colinalworth.gwtdriver.gxt.models;
+package org.senchalabs.gwt.gwtdriver.gxt.models;
 
 /*
  * #%L
@@ -22,9 +22,8 @@ package com.colinalworth.gwtdriver.gxt.models;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import com.colinalworth.gwtdriver.invoke.ClientMethods;
-import com.colinalworth.gwtdriver.invoke.ClientMethodsFactory;
+import org.senchalabs.gwt.gwtdriver.invoke.ClientMethods;
+import org.senchalabs.gwt.gwtdriver.invoke.ClientMethodsFactory;
 
 public class ComboBox extends Field {
 	private final ComboBoxMethods methods = ClientMethodsFactory.create(ComboBoxMethods.class, getDriver());

@@ -1,4 +1,4 @@
-package com.colinalworth.gwtdriver.gxt.models;
+package org.senchalabs.gwt.gwtdriver.gxt.models;
 
 /*
  * #%L
@@ -23,13 +23,13 @@ package com.colinalworth.gwtdriver.gxt.models;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
+import org.senchalabs.gwt.gwtdriver.by.ByWidget;
+import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
+import org.senchalabs.gwt.gwtdriver.gxt.models.Field.FieldFinder;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
-import com.colinalworth.gwtdriver.by.ByNearestWidget;
-import com.colinalworth.gwtdriver.by.ByWidget;
-import com.colinalworth.gwtdriver.by.FasterByChained;
-import com.colinalworth.gwtdriver.gxt.models.Field.FieldFinder;
-import com.colinalworth.gwtdriver.models.GwtWidget;
-import com.colinalworth.gwtdriver.models.GwtWidgetFinder;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 
 public class Field extends GwtWidget<FieldFinder> {

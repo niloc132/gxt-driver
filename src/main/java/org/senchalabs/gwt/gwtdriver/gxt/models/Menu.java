@@ -1,4 +1,4 @@
-package com.colinalworth.gwtdriver.gxt.models;
+package org.senchalabs.gwt.gwtdriver.gxt.models;
 
 /*
  * #%L
@@ -29,11 +29,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.pagefactory.ByChained;
-
-import com.colinalworth.gwtdriver.by.ByWidget;
-import com.colinalworth.gwtdriver.gxt.models.Menu.MenuFinder;
-import com.colinalworth.gwtdriver.models.GwtWidget;
-import com.colinalworth.gwtdriver.models.GwtWidgetFinder;
+import org.senchalabs.gwt.gwtdriver.by.ByWidget;
+import org.senchalabs.gwt.gwtdriver.gxt.models.Menu.MenuFinder;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
 public class Menu extends GwtWidget<MenuFinder> {
 	public Menu(WebDriver driver, WebElement element) {

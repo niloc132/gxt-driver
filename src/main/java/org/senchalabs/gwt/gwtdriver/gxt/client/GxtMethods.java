@@ -1,4 +1,4 @@
-package com.colinalworth.gwtdriver.gxt.client;
+package org.senchalabs.gwt.gwtdriver.gxt.client;
 
 /*
  * #%L
@@ -20,8 +20,9 @@ package com.colinalworth.gwtdriver.gxt.client;
  * #L%
  */
 
-import com.colinalworth.gwtdriver.client.SeleniumExporter;
-import com.colinalworth.gwtdriver.client.SeleniumExporter.Function;
+import org.senchalabs.gwt.gwtdriver.client.SeleniumExporter;
+import org.senchalabs.gwt.gwtdriver.client.SeleniumExporter.Function;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JsArray;
 
