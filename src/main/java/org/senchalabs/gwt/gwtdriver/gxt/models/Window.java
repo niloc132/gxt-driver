@@ -43,6 +43,15 @@ public class Window extends GwtWidget<WindowFinder> {
 		super(driver, element);
 	}
 
+	public WebElement getHeaderElement() {
+		return getElement().findElement(new FasterByChained(By.xpath("*|*/*|*/*/*"), 
+				new ByWidget(getDriver(), com.sencha.gxt.widget.core.client.Header.class)));
+	}
+
+	public boolean isCollapsed() {
+		return getHeaderElement().getSize().getHeight() == getElement().getSize().getHeight();
+	}
+
 	public static class WindowFinder extends GwtWidgetFinder<Window> {
 		private String heading;
 		private boolean atTop = false;

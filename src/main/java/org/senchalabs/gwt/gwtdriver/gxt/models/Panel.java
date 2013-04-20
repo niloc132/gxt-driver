@@ -24,6 +24,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
+import org.senchalabs.gwt.gwtdriver.by.ByWidget;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
 import org.senchalabs.gwt.gwtdriver.gxt.models.Panel.PanelFinder;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
@@ -35,6 +36,15 @@ public class Panel extends GwtWidget<PanelFinder> {
 
 	public Panel(WebDriver driver, WebElement element) {
 		super(driver, element);
+	}
+	
+	public WebElement getHeaderElement() {
+		return getElement().findElement(new FasterByChained(By.xpath(".//*"), 
+				new ByWidget(getDriver(), com.sencha.gxt.widget.core.client.Header.class)));
+	}
+
+	public boolean isCollapsed() {
+		return getHeaderElement().getSize().getHeight() == getElement().getSize().getHeight();
 	}
 	
 	//todo tools, buttons
