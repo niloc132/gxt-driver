@@ -31,6 +31,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ByChained;
 import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
 import org.senchalabs.gwt.gwtdriver.by.ByWidget;
+import org.senchalabs.gwt.gwtdriver.by.CheatingByChained;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
 import org.senchalabs.gwt.gwtdriver.gxt.models.Window.WindowFinder;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
@@ -44,7 +45,7 @@ public class Window extends GwtWidget<WindowFinder> {
 	}
 
 	public WebElement getHeaderElement() {
-		return getElement().findElement(new FasterByChained(By.xpath("*|*/*|*/*/*"), 
+		return getElement().findElement(new FasterByChained(By.xpath("*|*/*|*/*/*"),
 				new ByWidget(getDriver(), com.sencha.gxt.widget.core.client.Header.class)));
 	}
 
@@ -60,24 +61,35 @@ public class Window extends GwtWidget<WindowFinder> {
 			this.heading = heading;
 			return this;
 		}
+
 		@Override
 		public WindowFinder withDriver(WebDriver driver) {
 			return (WindowFinder) super.withDriver(driver);
 		}
+
 		public WindowFinder atTop() {
 			atTop = true;
 			return this;
 		}
+
 		@Override
 		public Window done() {
 			if (heading != null) {
 				String escaped = escapeToString(heading);
 				//TODO the first two clauses can be a ByChained, then iterate over items and see if
 				//it matches the contains(), if so, just return the starting point
+
+				// Within the body tag, there are several Windows.
+				// For each one, select the first Header (the window's own header),
+				// and test it for the text. If it matches, return the first surrounding window
 				elt = driver.findElement(new FasterByChained(By.xpath("//body/*"),
-								new ByWidget(driver, com.sencha.gxt.widget.core.client.Window.class), 
-								By.xpath(".//*[contains(text(), " + escaped + ")]"), 
-								new ByNearestWidget(driver, com.sencha.gxt.widget.core.client.Window.class)));
+						new ByWidget(driver, com.sencha.gxt.widget.core.client.Window.class),
+						By.xpath(".//*"),
+						new CheatingByChained(
+								new ByWidget(driver, com.sencha.gxt.widget.core.client.Header.class)
+						),
+						By.xpath(".//*[contains(text(), " + escaped + ")]"),
+						new ByNearestWidget(driver, com.sencha.gxt.widget.core.client.Window.class)));
 			} else if (atTop) {
 				//TODO totally untested
 				List<WebElement> allWindows = driver.findElements(new ByChained(By.xpath("//body/*"),

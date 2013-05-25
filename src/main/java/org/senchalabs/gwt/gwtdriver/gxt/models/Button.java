@@ -24,7 +24,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
-import org.senchalabs.gwt.gwtdriver.by.CheatingByChained;
+import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
 import org.senchalabs.gwt.gwtdriver.gxt.models.Button.ButtonFinder;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
@@ -59,7 +59,7 @@ public class Button extends GwtWidget<ButtonFinder> {
 		public Button done() {
 			if (text != null) {
 				String escaped = escapeToString(text);
-				withElement(driver.findElement(new CheatingByChained(By.xpath("//*[contains(text(),"+escaped+")]"), new ByNearestWidget(driver, CellButtonBase.class))));
+				withElement(driver.findElement(new FasterByChained(By.xpath("//*[contains(text(),"+escaped+")]"), new ByNearestWidget(driver, CellButtonBase.class))));
 			}
 			return new Button(driver, elt);
 		}
