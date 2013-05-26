@@ -45,7 +45,7 @@ public class Menu extends GwtWidget<MenuFinder> {
 			return atDepth(0);
 		}
 		public MenuFinder atDepth(int depth) {
-			
+			this.depth = 0;
 			return this;
 		}
 		@Override
@@ -61,6 +61,8 @@ public class Menu extends GwtWidget<MenuFinder> {
 	public Menu mouseOver(String text) {
 		String escaped = escapeToString(text);
 		WebElement elt = getElement().findElement(By.xpath(".//*[contains(text(),"+escaped+")]"));
+		assert elt instanceof Locatable : "Can't cast element from " + getDriver().getClass() + ", to Locatable, can't mouse over";
+		assert getDriver() instanceof HasInputDevices : "Can't cast current WebDriver " + getDriver().getClass() + " to HasInputDriver, can't mouse over";
 		Coordinates loc = ((Locatable)elt).getCoordinates();
 		((HasInputDevices)getDriver()).getMouse().mouseMove(loc);
 		return new MenuFinder().atTop().withDriver(getDriver()).done();
