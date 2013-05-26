@@ -45,7 +45,7 @@ public class Window extends GwtWidget<WindowFinder> {
 	}
 
 	public WebElement getHeaderElement() {
-		return getElement().findElement(new FasterByChained(By.xpath("*|*/*|*/*/*"),
+		return getElement().findElement(new FasterByChained(By.xpath(".//*"),
 				new ByWidget(getDriver(), com.sencha.gxt.widget.core.client.Header.class)));
 	}
 
@@ -91,12 +91,11 @@ public class Window extends GwtWidget<WindowFinder> {
 						By.xpath(".//*[contains(text(), " + escaped + ")]"),
 						new ByNearestWidget(driver, com.sencha.gxt.widget.core.client.Window.class)));
 			} else if (atTop) {
-				//TODO totally untested
 				List<WebElement> allWindows = driver.findElements(new ByChained(By.xpath("//body/*"),
 						new ByWidget(driver, com.sencha.gxt.widget.core.client.Window.class)));
 				Collections.sort(allWindows, new Comparator<WebElement>() {
 					public int compare(WebElement o1, WebElement o2) {
-						return Integer.parseInt(o1.getCssValue("z-index")) - Integer.parseInt(o2.getCssValue("z-index"));
+						return Integer.parseInt(o2.getCssValue("z-index")) - Integer.parseInt(o1.getCssValue("z-index"));
 					}
 				});
 				elt = allWindows.get(0);
