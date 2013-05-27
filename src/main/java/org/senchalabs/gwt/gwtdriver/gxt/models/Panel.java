@@ -58,6 +58,7 @@ public class Panel extends GwtWidget<PanelFinder> {
 		}
 		@Override
 		public Panel done() {
+			WebElement elt = this.elt;
 			if (heading != null) {
 				String escapedString = escapeToString(heading);
 				elt = elt.findElement(

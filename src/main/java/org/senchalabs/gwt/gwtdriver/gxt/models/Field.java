@@ -60,6 +60,7 @@ public class Field extends GwtWidget<FieldFinder> {
 		}
 		@Override
 		public Field done() {
+			WebElement elt = this.elt;
 			if (fieldLabel != null) {
 				String escaped = escapeToString(fieldLabel);
 				elt = elt.findElement(new FasterByChained(By.xpath(".|.//*[contains(text(), "+escaped+")]"),
@@ -70,8 +71,9 @@ public class Field extends GwtWidget<FieldFinder> {
 						)));
 				return new Field(driver, elt);
 			} else if (text == null) {
+				String escaped = escapeToString(text);
 				return new Field(driver, elt.findElement(new FasterByChained(
-						By.xpath(".|.//*[contains(text(), '"+fieldLabel+"')]"),
+						By.xpath(".|.//*[contains(text(), "+escaped+")]"),
 						new ByNearestWidget(driver, com.sencha.gxt.widget.core.client.form.Field.class)
 						)));
 			} else {

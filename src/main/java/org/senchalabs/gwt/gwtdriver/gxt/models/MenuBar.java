@@ -51,6 +51,7 @@ public class MenuBar extends GwtWidget<MenuBar.MenuBarFinder> {
 
 		@Override
 		public MenuBar done() {
+			WebElement elt = this.elt;
 			if (item != null) {
 
 				//find a MenuBarItem with the given text, then find the parent MenuBar
@@ -67,7 +68,7 @@ public class MenuBar extends GwtWidget<MenuBar.MenuBarFinder> {
 	}
 
 	public Menu click(String text) {
-		getElement().findElement(By.xpath(".//*[contains(text(), '"+text+"')]")).click();
+		getElement().findElement(By.xpath(".//*[contains(text(), "+escapeToString(text)+")]")).click();
 		return new Menu.MenuFinder().atTop().withDriver(getDriver()).done();
 	}
 }

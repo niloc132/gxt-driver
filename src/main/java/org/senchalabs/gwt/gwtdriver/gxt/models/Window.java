@@ -74,6 +74,7 @@ public class Window extends GwtWidget<WindowFinder> {
 
 		@Override
 		public Window done() {
+			WebElement elt = this.elt;
 			if (heading != null) {
 				String escaped = escapeToString(heading);
 				//TODO the first two clauses can be a ByChained, then iterate over items and see if

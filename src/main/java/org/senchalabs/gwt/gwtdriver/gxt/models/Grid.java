@@ -56,7 +56,7 @@ public class Grid extends GwtWidget<GwtWidgetFinder<Grid>> {
 
 	public ColumnHeader getColumnHeaderWithHeading(String headingText) {
 		WebElement elt = getElement().findElement(new FasterByChained(
-				By.xpath(".//div[a][img]//*[contains(text(), '" + headingText + "')]"), 
+				By.xpath(".//div[a][img]//*[contains(text(), " + escapeToString(headingText) + ")]"),
 				new ByNearestWidget(getDriver(), com.sencha.gxt.widget.core.client.grid.ColumnHeader.Head.class)));
 		return new ColumnHeader(getDriver(), elt);
 	}

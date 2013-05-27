@@ -69,6 +69,6 @@ public class Menu extends GwtWidget<MenuFinder> {
 	}
 
 	public void click(String text) {
-		getElement().findElement(By.xpath(".//*[contains(text(), '"+text+"')]")).click();
+		getElement().findElement(By.xpath(".//*[contains(text(), "+escapeToString(text)+")]")).click();
 	}
 }

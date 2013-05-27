@@ -33,7 +33,6 @@ public class ListView extends GwtWidget<GwtWidgetFinder<ListView>> {
 	}
 
 	public void clickItemWithText(String text) {
-		//TODO escape
-		getElement().findElement(By.xpath(".//*[contains(text(), '"+text+"')]")).click();
+		getElement().findElement(By.xpath(".//*[contains(text(), "+escapeToString(text)+")]")).click();
 	}
 }
