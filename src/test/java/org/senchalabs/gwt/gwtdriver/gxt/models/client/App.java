@@ -22,27 +22,38 @@ package org.senchalabs.gwt.gwtdriver.gxt.models.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.sencha.gxt.widget.core.client.Window;
+import com.sencha.gxt.widget.core.client.menu.Menu;
+import com.sencha.gxt.widget.core.client.menu.MenuBar;
+import com.sencha.gxt.widget.core.client.menu.MenuBarItem;
+import com.sencha.gxt.widget.core.client.menu.MenuItem;
 
 /**
  *
  */
 public class App implements EntryPoint {
 	public void onModuleLoad() {
-	    start(com.google.gwt.user.client.Window.Location.getQueryString().substring(1));
+		start(com.google.gwt.user.client.Window.Location.getQueryString().substring(1));
 	}
+
 	public native void start(String key) /*-{
-	    switch (key) {
+		switch (key) {
 			case "window":
-                this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::window()();
-			break;
-            default:
-                this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::error(Ljava/lang/String;)(key);
+				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::window()();
+				break;
+			case "menubar":
+				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::menubar()();
+				break;
+			default:
+				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::error(Ljava/lang/String;)(key);
 		}
 	}-*/;
+
 	private void error(String key) {
 		com.google.gwt.user.client.Window.alert("Could not parse key " + key);
 	}
+
 	private void window() {
 		Window a = new Window();
 		a.setHeadingText("Test Window A");
@@ -73,5 +84,40 @@ public class App implements EntryPoint {
 		a.show();
 		a.setPagePosition(150, 0);
 		a.setPixelSize(200, 200);
+	}
+
+	private void menubar() {
+		MenuBar menuBar = new MenuBar();
+		MenuBarItem file = new MenuBarItem("File");
+		file.setMenu(new Menu());
+		MenuItem newItem = new MenuItem("New");
+		newItem.setSubMenu(new Menu());
+		newItem.getSubMenu().add(new MenuItem("Project"));
+		newItem.getSubMenu().add(new MenuItem("Object"));
+		newItem.getSubMenu().add(new MenuItem("Database"));
+		file.getMenu().add(newItem);
+
+		MenuItem open = new MenuItem("Open...");
+		file.getMenu().add(open);
+
+		menuBar.add(file);
+
+		MenuBarItem edit = new MenuBarItem("Edit");
+		edit.setMenu(new Menu());
+		edit.getMenu().add(new MenuItem("Copy"));
+		edit.getMenu().add(new MenuItem("Paste"));
+
+		MenuItem find = new MenuItem("Find");
+		find.setSubMenu(new Menu());
+		find.getSubMenu().add(new MenuItem("Find In Project"));
+		find.getSubMenu().add(new MenuItem("Find In File"));
+
+		edit.getMenu().add(find);
+
+		menuBar.add(edit);
+
+
+		RootPanel.get().add(menuBar);
+		menuBar.setWidth(500);
 	}
 }
