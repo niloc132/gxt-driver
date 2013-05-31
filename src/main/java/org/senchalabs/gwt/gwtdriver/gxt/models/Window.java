@@ -26,6 +26,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ByChained;
@@ -74,23 +75,40 @@ public class Window extends GwtWidget<WindowFinder> {
 
 		@Override
 		public Window done() {
-			WebElement elt = this.elt;
+			WebElement elt = null;
 			if (heading != null) {
-				String escaped = escapeToString(heading);
-				//TODO the first two clauses can be a ByChained, then iterate over items and see if
-				//it matches the contains(), if so, just return the starting point
-
 				// Within the body tag, there are several Windows.
+				String escaped = escapeToString(heading);
+				List<WebElement> windows = driver.findElements(new ByChained(
+						By.xpath("//body/*"),
+						new ByWidget(driver, com.sencha.gxt.widget.core.client.Window.class)
+				));
+
 				// For each one, select the first Header (the window's own header),
 				// and test it for the text. If it matches, return the first surrounding window
-				elt = driver.findElement(new FasterByChained(By.xpath("//body/*"),
-						new ByWidget(driver, com.sencha.gxt.widget.core.client.Window.class),
-						By.xpath(".//*"),
-						new CheatingByChained(
-								new ByWidget(driver, com.sencha.gxt.widget.core.client.Header.class)
-						),
-						By.xpath(".//*[contains(text(), " + escaped + ")]"),
-						new ByNearestWidget(driver, com.sencha.gxt.widget.core.client.Window.class)));
+				for (WebElement window : windows) {
+					for (WebElement possibleHeader : window.findElements(By.xpath(".//*"))) {
+						// Using a try/catch here to get CheatingByChained for a faster lookup as
+						// this will throw an exception if it doesn't match so we can move on to the next,
+						// or it will return right away when it matches all rules
+						try {
+							possibleHeader.findElement(new CheatingByChained(
+									new ByWidget(driver, com.sencha.gxt.widget.core.client.Header.class),
+									By.xpath(".//*[contains(text(), " + escaped + ")]"),
+									new ByNearestWidget(driver, com.sencha.gxt.widget.core.client.Window.class)
+							));
+							elt = window;
+							break;
+						} catch (NoSuchElementException ex) {
+							// Ignore, continue on to the next element in the list
+						}
+					}
+					if (elt != null) {
+						// Found a matching window, give up and go home
+						break;
+					}
+
+				}
 			} else if (atTop) {
 				List<WebElement> allWindows = driver.findElements(new ByChained(By.xpath("//body/*"),
 						new ByWidget(driver, com.sencha.gxt.widget.core.client.Window.class)));
