@@ -70,7 +70,7 @@ public class Field extends GwtWidget<FieldFinder> {
 								new ByWidget(driver, com.sencha.gxt.widget.core.client.form.Field.class)
 						)));
 				return new Field(driver, elt);
-			} else if (text == null) {
+			} else if (text != null) {
 				String escaped = escapeToString(text);
 				return new Field(driver, elt.findElement(new FasterByChained(
 						By.xpath(".|.//*[contains(text(), "+escaped+")]"),
