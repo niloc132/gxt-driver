@@ -49,7 +49,6 @@ public class Field extends GwtWidget<FieldFinder> {
 
 	public static class FieldFinder extends GwtWidgetFinder<Field> {
 		private String text;
-		private String id;
 		public FieldFinder withText(String text) {
 			this.text = text;
 			return this;
@@ -60,10 +59,6 @@ public class Field extends GwtWidget<FieldFinder> {
 			this.fieldLabel = label;
 			return this;
 		}
-	    public FieldFinder withId(String id) {
-	        this.id = id;
-	        return this;
-	    }
 		@Override
 		public FieldFinder withDriver(WebDriver driver) {
 			return (FieldFinder) super.withDriver(driver);
@@ -86,9 +81,6 @@ public class Field extends GwtWidget<FieldFinder> {
 						By.xpath(".|.//*[contains(text(), "+escaped+")]"),
 						new ByNearestWidget(driver, com.sencha.gxt.widget.core.client.form.Field.class)
 						)));
-			} else if (id != null) {
-			    elt = elt.findElement(By.id(id));
-			    return new Field(driver, elt);
 			} else {
 				return new Field(driver, elt.findElement(new ByNearestWidget(driver, com.sencha.gxt.widget.core.client.form.Field.class)));
 			}
