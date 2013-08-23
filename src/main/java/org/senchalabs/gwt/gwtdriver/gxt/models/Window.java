@@ -34,7 +34,6 @@ import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
 import org.senchalabs.gwt.gwtdriver.by.ByWidget;
 import org.senchalabs.gwt.gwtdriver.by.CheatingByChained;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
-import org.senchalabs.gwt.gwtdriver.gxt.models.Button.ButtonFinder;
 import org.senchalabs.gwt.gwtdriver.gxt.models.Window.WindowFinder;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
@@ -53,10 +52,6 @@ public class Window extends GwtWidget<WindowFinder> {
 
 	public boolean isCollapsed() {
 		return getHeaderElement().getSize().getHeight() == getElement().getSize().getHeight();
-	}
-	
-	public boolean isVisible() {
-	  return getElement().isDisplayed();
 	}
 
 	public static class WindowFinder extends GwtWidgetFinder<Window> {
