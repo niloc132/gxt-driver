@@ -21,9 +21,9 @@ package org.senchalabs.gwt.gwtdriver.gxt.models;
  */
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.HasInputDevices;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.HasInputDevices;
 import org.openqa.selenium.interactions.internal.Coordinates;
 import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.pagefactory.ByChained;

@@ -22,11 +22,8 @@ package org.senchalabs.gwt.gwtdriver.gxt.models;
 
 import com.sencha.gxt.widget.core.client.menu.MenuBarItem;
 import org.openqa.selenium.By;
-import org.openqa.selenium.HasInputDevices;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.internal.Coordinates;
-import org.openqa.selenium.internal.Locatable;
 import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
