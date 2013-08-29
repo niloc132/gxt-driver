@@ -51,13 +51,13 @@ public class Tree extends GwtWidget<GwtWidgetFinder<Tree>> {
 		/** Gets the element of the parent node of the given item */
 		WebElement getParent(WebElement widget, WebElement item);
 
-		String isExpanded(WebElement widget, WebElement item);
+		boolean isExpanded(WebElement widget, WebElement item);
 		WebElement getExpandElement(WebElement widget, WebElement item);
 
 		WebElement getCheckElement(WebElement widget, WebElement item);
 //		CheckEnum getCheck(WebElement widget, WebElement item);
 
-		String isLoading(WebElement widget, WebElement item);
+		boolean isLoading(WebElement widget, WebElement item);
 	}
 	private final TreeMethods methods;
 
@@ -81,7 +81,7 @@ public class Tree extends GwtWidget<GwtWidgetFinder<Tree>> {
 			methods.getExpandElement(getWidgetElement(), getElement()).click();
 		}
 		public boolean isExpanded() {
-			return methods.isExpanded(getWidgetElement(), getElement()).equals("true");
+			return methods.isExpanded(getWidgetElement(), getElement());
 		}
 		public void toggleCheck() {
 			methods.getCheckElement(getWidgetElement(), getElement()).click();
@@ -98,7 +98,7 @@ public class Tree extends GwtWidget<GwtWidgetFinder<Tree>> {
 					.until(new Predicate<WebDriver>() {
 						@Override
 						public boolean apply(WebDriver input) {
-							return !methods.isLoading(getWidgetElement(), getElement()).equals("true");
+							return !methods.isLoading(getWidgetElement(), getElement());
 						}
 					});
 		}

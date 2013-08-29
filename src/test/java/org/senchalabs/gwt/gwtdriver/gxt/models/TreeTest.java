@@ -20,6 +20,7 @@ package org.senchalabs.gwt.gwtdriver.gxt.models;
  * #L%
  */
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.pagefactory.ByChained;
@@ -44,12 +45,12 @@ public class TreeTest extends BaseTest {
 	public void testRootNodes() {
 		Tree t = new Tree(driver, driver.findElement(new ByChained(By.xpath("//body/*"), new ByWidget(driver, com.sencha.gxt.widget.core.client.tree.Tree.class))));
 
-		assert t.getRootChildren().size() == 2;
+		Assert.assertEquals(2, t.getRootChildren().size());
 
 		Item root = t.findItemWithText("root");
-		assert root.isExpanded() == false;
-		assert root.getChildren().size() == 0;
+		Assert.assertEquals(false, root.isExpanded());
+		Assert.assertEquals(0, root.getChildren().size());
 		root.toggleExpand();
-		assert root.getChildren().size() == 2;
+		Assert.assertEquals(2, root.getChildren().size());
 	}
 }
