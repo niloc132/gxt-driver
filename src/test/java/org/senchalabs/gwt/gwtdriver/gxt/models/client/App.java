@@ -23,11 +23,15 @@ package org.senchalabs.gwt.gwtdriver.gxt.models.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.sencha.gxt.core.client.ToStringValueProvider;
+import com.sencha.gxt.data.shared.ModelKeyProvider;
+import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuBar;
 import com.sencha.gxt.widget.core.client.menu.MenuBarItem;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
+import com.sencha.gxt.widget.core.client.tree.Tree;
 
 /**
  *
@@ -44,6 +48,9 @@ public class App implements EntryPoint {
 				break;
 			case "menubar":
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::menubar()();
+				break;
+			case "tree":
+				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::tree()();
 				break;
 			default:
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::error(Ljava/lang/String;)(key);
@@ -119,5 +126,24 @@ public class App implements EntryPoint {
 
 		RootPanel.get().add(menuBar);
 		menuBar.setWidth(500);
+	}
+	private void tree() {
+		TreeStore<String> store = new TreeStore<String>(new ModelKeyProvider<String>() {
+			@Override
+			public String getKey(String item) {
+				return item;
+			}
+		});
+		store.add("root");
+		store.add("root", "foo");
+		store.add("foo", "bar");
+		store.add("root", "baz");
+		store.add("other root");
+
+		Tree<String, String> tree = new Tree<String, String>(store, new ToStringValueProvider<String>());
+
+		tree.setPixelSize(1000, 1000);
+
+		RootPanel.get().add(tree);
 	}
 }
