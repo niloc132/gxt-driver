@@ -31,8 +31,10 @@ import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
 import org.senchalabs.gwt.gwtdriver.by.ByWidget;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
+@ForWidget(com.sencha.gxt.widget.core.client.grid.Grid.class)
 public class Grid extends GwtWidget<GwtWidgetFinder<Grid>> {
 
 	public Grid(WebDriver driver, WebElement element) {

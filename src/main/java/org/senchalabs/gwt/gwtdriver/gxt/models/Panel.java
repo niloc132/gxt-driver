@@ -28,10 +28,12 @@ import org.senchalabs.gwt.gwtdriver.by.ByWidget;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
 import org.senchalabs.gwt.gwtdriver.gxt.models.Panel.PanelFinder;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
 import com.sencha.gxt.widget.core.client.ContentPanel;
 
+@ForWidget(ContentPanel.class)
 public class Panel extends GwtWidget<PanelFinder> {
 
 	public Panel(WebDriver driver, WebElement element) {

@@ -32,8 +32,10 @@ import org.openqa.selenium.support.pagefactory.ByChained;
 import org.senchalabs.gwt.gwtdriver.by.ByWidget;
 import org.senchalabs.gwt.gwtdriver.gxt.models.Menu.MenuFinder;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
+@ForWidget(com.sencha.gxt.widget.core.client.menu.Menu.class)
 public class Menu extends GwtWidget<MenuFinder> {
 	public Menu(WebDriver driver, WebElement element) {
 		super(driver, element);

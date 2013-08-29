@@ -27,10 +27,12 @@ import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
 import org.senchalabs.gwt.gwtdriver.gxt.models.Button.ButtonFinder;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
 import com.sencha.gxt.widget.core.client.button.CellButtonBase;
 
+@ForWidget(CellButtonBase.class)
 public class Button extends GwtWidget<ButtonFinder> {
 
 	public Button(WebDriver driver, WebElement element) {

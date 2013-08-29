@@ -20,6 +20,7 @@ package org.senchalabs.gwt.gwtdriver.gxt.models;
  * #L%
  */
 
+import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,10 +29,10 @@ import org.senchalabs.gwt.gwtdriver.by.ByWidget;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
 import org.senchalabs.gwt.gwtdriver.gxt.models.Field.FieldFinder;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
-import com.sencha.gxt.widget.core.client.form.FieldLabel;
-
+@ForWidget(com.sencha.gxt.widget.core.client.form.Field.class)
 public class Field extends GwtWidget<FieldFinder> {
 
 	public Field(WebDriver driver, WebElement element) {

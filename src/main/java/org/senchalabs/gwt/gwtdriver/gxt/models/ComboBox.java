@@ -24,7 +24,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.senchalabs.gwt.gwtdriver.invoke.ClientMethods;
 import org.senchalabs.gwt.gwtdriver.invoke.ClientMethodsFactory;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 
+@ForWidget(com.sencha.gxt.widget.core.client.form.ComboBox.class)
 public class ComboBox extends Field {
 	private final ComboBoxMethods methods = ClientMethodsFactory.create(ComboBoxMethods.class, getDriver());
 

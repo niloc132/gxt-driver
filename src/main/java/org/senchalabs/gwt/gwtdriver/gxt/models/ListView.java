@@ -24,8 +24,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
+@ForWidget(com.sencha.gxt.widget.core.client.ListView.class)
 public class ListView extends GwtWidget<GwtWidgetFinder<ListView>> {
 
 	public ListView(WebDriver driver, WebElement element) {

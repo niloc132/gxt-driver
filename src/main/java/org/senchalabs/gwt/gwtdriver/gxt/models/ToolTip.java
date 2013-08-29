@@ -67,7 +67,7 @@ public class ToolTip extends GwtWidget<ToolTipFinder> {
 						return Integer.parseInt(o2.getElement().getCssValue("z-index")) - Integer.parseInt(o1.getElement().getCssValue("z-index"));
 					}
 				});
-			
+
 				return allTooltips.get(0);
 			} else if (text != null) {
 				elt = driver.findElement(new FasterByChained(By.xpath("//body/*"),
