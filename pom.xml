@@ -1,6 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<groupId>org.senchalabs.gwt</groupId>
 	<artifactId>gxt-driver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -10,14 +15,11 @@
 		<name>Sencha Labs</name>
 		<url>http://senchalabs.org/</url>
 	</organization>
-	<properties>
-		<selenium.version>2.35.0</selenium.version>
-		<gwt.version>2.5.1</gwt.version>
-		<gxt.version>3.0.1</gxt.version>
-
-		<java.version>1.6</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+	<scm>
+		<connection>scm:git:ssh://git@github.com:niloc132/gxt-driver.git</connection>
+		<developerConnection>scm:git:https://github.com/niloc132/gxt-driver.git</developerConnection>
+		<url>https://github.com/niloc132/gxt-driver</url>
+	</scm>
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -26,6 +28,14 @@
 			<comments>A business-friendly OSS license</comments>
 		</license>
 	</licenses>
+	<properties>
+		<selenium.version>2.35.0</selenium.version>
+		<gwt.version>2.5.1</gwt.version>
+		<gxt.version>3.0.1</gxt.version>
+
+		<java.version>1.6</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.senchalabs.gwt</groupId>
@@ -91,11 +101,9 @@
 						</goals>
 					</execution>
 					<!-- Doesnt work, since gwt:compile won't use test scope -->
-					<!-- <execution> <id>compiled-js-for-tests</id> <phase>process-test-classes</phase> 
-						<goals> <goal>compile</goal> </goals> <configuration> <warSourceDirectory>${basedir}/src/test/webapp</warSourceDirectory> 
-						<webappDirectory>${project.build.directory}/www</webappDirectory> <modules> 
-						<module>com.colinalworth.gwtdriver.models.SimpleWidgets</module> </modules> 
-						</configuration> </execution> -->
+					<!-- <execution> <id>compiled-js-for-tests</id> <phase>process-test-classes</phase> <goals> <goal>compile</goal> </goals> 
+						<configuration> <warSourceDirectory>${basedir}/src/test/webapp</warSourceDirectory> <webappDirectory>${project.build.directory}/www</webappDirectory> 
+						<modules> <module>com.colinalworth.gwtdriver.models.SimpleWidgets</module> </modules> </configuration> </execution> -->
 				</executions>
 				<dependencies>
 					<dependency>
@@ -110,50 +118,15 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<!-- <plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<executions>
-					<execution>
-						<id>compiled-js-for-tests</id>
-						<phase>process-test-classes</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>java</executable>
-							<classpathScope>test</classpathScope>
-							<arguments>
-								<argument>-classpath</argument>
-								<classpath />
-								<argument>com.google.gwt.dev.Compiler</argument>
-								<argument>-war</argument>
-								<argument>${project.build.directory}/www</argument>
-								<argument>com.colinalworth.gwtdriver.models.SimpleWidgets</argument>
-							</arguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin> -->
-			<!-- 			<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-war-plugin</artifactId>
-							<version>2.2</version>
-							<executions>
-								<execution>
-									<phase>process-test-resources</phase>
-									<goals>
-										<goal>exploded</goal>
-									</goals>
-									<configuration>
-										<warSourceDirectory>${basedir}/src/test/webapp</warSourceDirectory>
-										<webappDirectory>${project.build.directory}/www</webappDirectory>
-									</configuration>
-								</execution>
-
-							</executions>
-						</plugin> -->
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> <version>1.2.1</version> 
+				<executions> <execution> <id>compiled-js-for-tests</id> <phase>process-test-classes</phase> <goals> <goal>exec</goal> </goals> 
+				<configuration> <executable>java</executable> <classpathScope>test</classpathScope> <arguments> <argument>-classpath</argument> 
+				<classpath /> <argument>com.google.gwt.dev.Compiler</argument> <argument>-war</argument> <argument>${project.build.directory}/www</argument> 
+				<argument>com.colinalworth.gwtdriver.models.SimpleWidgets</argument> </arguments> </configuration> </execution> </executions> 
+				</plugin> -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-war-plugin</artifactId> <version>2.2</version> 
+				<executions> <execution> <phase>process-test-resources</phase> <goals> <goal>exploded</goal> </goals> <configuration> <warSourceDirectory>${basedir}/src/test/webapp</warSourceDirectory> 
+				<webappDirectory>${project.build.directory}/www</webappDirectory> </configuration> </execution> </executions> </plugin> -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>license-maven-plugin</artifactId>
@@ -218,8 +191,7 @@
 					<artifactId>maven-war-plugin</artifactId>
 					<version>2.3</version>
 				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings
-					only. It has no influence on the Maven build itself. -->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -295,8 +267,7 @@
 		<profile>
 			<id>integration-test</id>
 			<dependencies>
-				<!-- TODO should be test scoped, but gwt:compile only works with
-				  compile scope -->
+				<!-- TODO should be test scoped, but gwt:compile only works with compile scope -->
 				<dependency>
 					<groupId>org.senchalabs.gwt</groupId>
 					<artifactId>gwt-driver</artifactId>
@@ -353,7 +324,7 @@
 									<classpathScope>test</classpathScope>
 									<arguments>
 										<argument>-classpath</argument>
-										<classpath/>
+										<classpath />
 										<argument>com.google.gwt.dev.Compiler</argument>
 										<argument>-war</argument>
 										<argument>${project.build.directory}/www-test</argument>
@@ -373,8 +344,7 @@
 							<stopPort>9966</stopPort>
 							<stopKey>foo</stopKey>
 							<connectors>
-								<connector
-										implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+								<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
 									<port>9080</port>
 									<maxIdleTime>60000</maxIdleTime>
 								</connector>
@@ -423,6 +393,92 @@
 										</include>
 									</includes>
 								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>javadoc-online</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<configuration>
+							<doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+							<docletArtifact>
+								<groupId>org.umlgraph</groupId>
+								<artifactId>umlgraph</artifactId>
+								<version>5.6.6</version>
+							</docletArtifact>
+							<additionalparam>
+								-horizontal
+							</additionalparam>
+							<header>
+			                <![CDATA[
+			                <script type="text/javascript">
+			                var hasNav = document.getElementsByClassName('topNav').length!=0;
+			                if (hasNav) {
+			                  var _gaq = _gaq || [];
+			                  _gaq.push(['_setAccount', 'UA-1396058-10']);
+			                  _gaq.push(['_trackPageview']);
+			                  (function() {
+			                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			                  })();
+			                  var el = document.getElementById('javadocsHeader');
+			                  el.style.display = 'block';
+			                }
+			                </script>
+			                <div id="javadocsHeader">
+			                  <a href="https://github.com/niloc132/gxt-driver" target="_blank">Project Home</a> 
+			                  <a href="https://github.com/niloc132/gxt-driver/wiki" target="_blank">Wiki Home</a>
+			                </div>
+			                ]]>
+							</header>
+						</configuration>
+						<executions>
+							<execution>
+								<id>site-upload-javadocs</id>
+								<phase>site</phase>
+								<goals>
+									<goal>javadoc</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<!-- Gihub Upload -->
+					<!-- run 'mvn site' to upload -->
+					<!-- run 'mvn site -X' to debug and upload. -->
+					<plugin>
+						<groupId>com.github.github</groupId>
+						<artifactId>site-maven-plugin</artifactId>
+						<version>0.8</version>
+						<configuration>
+							<!-- <dryRun>true</dryRun> -->
+							<message>Creating site for ${project.version}</message>
+							<!-- github > sets the ~/.m2/setting.xml server id profile -->
+							<server>github</server>
+							<outputDirectory>${project.build.directory}/site</outputDirectory>
+							<excludes>
+								<exclude>*.DS_Store</exclude>
+								<exclude>*.sh</exclude>
+								<exclude>options</exclude>
+								<exclude>packages</exclude>
+							</excludes>
+							<force>true</force>
+							<merge>true</merge>
+						</configuration>
+						<executions>
+							<execution>
+								<id>site-upload-javadocs</id>
+								<phase>site</phase>
+								<goals>
+									<goal>site</goal>
+								</goals>
 							</execution>
 						</executions>
 					</plugin>
