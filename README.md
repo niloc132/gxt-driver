@@ -8,7 +8,7 @@ GXT and GWT bindings for Selenium WebDriver.
 * <a href="https://github.com/niloc132/gxt-driver/wiki">Wiki Home</a>
 
 ##Download
-* [[Maven Configuration]]
+* <a href="https://github.com/niloc132/gxt-driver/wiki/Maven-Configuration">Maven Configuration</a>
 
 ##Extends
 * <a href="https://github.com/niloc132/gwt-driver">GWT Driver</a>
