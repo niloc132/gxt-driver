@@ -28,26 +28,33 @@ import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 
 @ForWidget(com.sencha.gxt.widget.core.client.form.ComboBox.class)
 public class ComboBox extends Field {
-	private final ComboBoxMethods methods = ClientMethodsFactory.create(ComboBoxMethods.class, getDriver());
+  private final ComboBoxMethods methods = ClientMethodsFactory.create(ComboBoxMethods.class, getDriver());
 
-	public ComboBox(WebDriver driver, WebElement element) {
-		super(driver, element);
-	}
+  public ComboBox(WebDriver driver, WebElement element) {
+    super(driver, element);
+  }
 
-	public void clickTrigger() {
-		methods.clickTrigger(getElement());
-	}
-	
-	public ListView getListView() {
-		return null;
-	}
+  public void clickTrigger() {
+    methods.clickTrigger(getElement());
+  }
 
-	public interface ComboBoxMethods extends ClientMethods {
-		/**
-		 * Not a real click, but forces the combo box to expand.
-		 * @param parent
-		 */
-		void clickTrigger(WebElement parent);
-	}
+  public boolean isExpanded() {
+    return methods.isExpanded();
+  }
+
+  public ListView getListView() {
+    return null;
+  }
+
+  public interface ComboBoxMethods extends ClientMethods {
+    /**
+     * Not a real click, but forces the combo box to expand.
+     * 
+     * @param parent
+     */
+    void clickTrigger(WebElement parent);
+
+    boolean isExpanded();
+  }
 
 }
