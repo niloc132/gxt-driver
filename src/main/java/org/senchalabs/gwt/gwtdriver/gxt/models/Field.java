@@ -39,8 +39,8 @@ public class Field extends GwtWidget<FieldFinder> {
 		super(driver, element);
 	}
 
-	public void sendKeys(String text) {
-		getElement().findElement(By.tagName("input")).sendKeys(text);
+	public void sendKeys(CharSequence... keys) {
+		getElement().findElement(By.tagName("input")).sendKeys(keys);
 	}
 
 	public static class FieldFinder extends GwtWidgetFinder<Field> {
