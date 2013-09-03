@@ -415,6 +415,9 @@
 							<additionalparam>
 								-horizontal
 							</additionalparam>
+							<links>
+								<link>http://selenium.googlecode.com/svn/trunk/docs/api/java/</link>	
+						    </links>
 							<header>
 			                <![CDATA[
 			                <script type="text/javascript">
