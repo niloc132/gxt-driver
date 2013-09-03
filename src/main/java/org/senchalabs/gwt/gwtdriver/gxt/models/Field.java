@@ -22,6 +22,7 @@ package org.senchalabs.gwt.gwtdriver.gxt.models;
 
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
@@ -39,8 +40,12 @@ public class Field extends GwtWidget<FieldFinder> {
 		super(driver, element);
 	}
 
-	public void sendKeys(String text) {
-		getElement().findElement(By.tagName("input")).sendKeys(text);
+	public void sendKeys(String keys) {
+		getElement().findElement(By.tagName("input")).sendKeys(keys);
+	}
+	
+	public void sendKey(Keys key) {
+		sendKeys(key.toString());
 	}
 
 	public static class FieldFinder extends GwtWidgetFinder<Field> {
