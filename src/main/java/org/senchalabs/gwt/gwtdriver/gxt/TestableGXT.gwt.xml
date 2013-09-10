@@ -20,5 +20,7 @@
 <module>
     <inherits name="com.sencha.gxt.widget.core.Core" />
     <inherits name="org.senchalabs.gwt.gwtdriver.GwtDriver" />
-    <entry-point class="org.senchalabs.gwt.gwtdriver.gxt.client.GxtMethods" />
+    <extend-configuration-property name="gwtdriver.methods" value="org.senchalabs.gwt.gwtdriver.gxt.client.TreeClientMethods"/>
+    <extend-configuration-property name="gwtdriver.methods" value="org.senchalabs.gwt.gwtdriver.gxt.client.ComboBoxClientMethods"/>
+
 </module>
