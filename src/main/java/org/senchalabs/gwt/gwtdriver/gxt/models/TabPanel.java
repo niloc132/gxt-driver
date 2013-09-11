@@ -21,8 +21,10 @@ package org.senchalabs.gwt.gwtdriver.gxt.models;
  */
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
 import org.senchalabs.gwt.gwtdriver.by.ByWidget;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
@@ -30,6 +32,8 @@ import org.senchalabs.gwt.gwtdriver.gxt.models.TabPanel.TabPanelFinder;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -69,5 +73,38 @@ public class TabPanel extends GwtWidget<TabPanelFinder> {
 
 			return new TabPanel(driver, elt);
 		}
+	}
+
+	/**
+	 * Attempts a right click in the browser to show the context menu. Must be enabled in the client code, or no menu will be found
+	 * @see com.sencha.gxt.widget.core.client.TabPanel#setCloseContextMenu(boolean)
+	 */
+	public Menu rightClickTabWithText(String text) {
+		List<WebElement> elements = getElement().findElements(By.xpath(".//*[contains(text()," + escapeToString(text) + ")]"));
+		for (WebElement elt : elements) {
+			if (!elt.findElements(new FasterByChained(
+					new ByNearestWidget(getDriver()),
+					new ByWidget(getDriver(), com.sencha.gxt.widget.core.client.TabPanel.class)
+			)).isEmpty()) {
+				Actions a = new Actions(getDriver());
+				a.contextClick(elt);
+				a.perform();
+				return GwtWidget.find(Menu.class, getDriver()).atTop().done();
+			}
+		}
+		throw new NoSuchElementException("No tab found with text '" + text + "'");
+	}
+	public void clickTabWithText(String text) {
+		List<WebElement> elements = getElement().findElements(By.xpath(".//*[contains(text()," + escapeToString(text) + ")]"));
+		for (WebElement elt : elements) {
+			if (!elt.findElements(new FasterByChained(
+					new ByNearestWidget(getDriver()),
+					new ByWidget(getDriver(), com.sencha.gxt.widget.core.client.TabPanel.class)
+			)).isEmpty()) {
+				elt.click();
+				return;
+			}
+		}
+		throw new NoSuchElementException("No tab found with text '" + text + "'");
 	}
 }

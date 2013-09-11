@@ -21,12 +21,21 @@ package org.senchalabs.gwt.gwtdriver.gxt.models.client;
  */
 
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.sencha.gxt.core.client.ToStringValueProvider;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.TreeStore;
+import com.sencha.gxt.theme.blue.client.tabs.BluePlainTabPanelBottomAppearance;
+import com.sencha.gxt.theme.gray.client.tabs.GrayPlainTabPanelBottomAppearance;
+import com.sencha.gxt.widget.core.client.PlainTabPanel;
+import com.sencha.gxt.widget.core.client.TabItemConfig;
+import com.sencha.gxt.widget.core.client.TabPanel;
 import com.sencha.gxt.widget.core.client.Window;
+import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuBar;
 import com.sencha.gxt.widget.core.client.menu.MenuBarItem;
@@ -51,6 +60,9 @@ public class App implements EntryPoint {
 				break;
 			case "tree":
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::tree()();
+				break;
+			case "tabPanel":
+				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::tabPanel()();
 				break;
 			default:
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::error(Ljava/lang/String;)(key);
@@ -145,5 +157,44 @@ public class App implements EntryPoint {
 		tree.setPixelSize(1000, 1000);
 
 		RootPanel.get().add(tree);
+	}
+	private void tabPanel() {
+		//testing several panel setups to be sure that different structure doesn't affect the finder
+		TabPanel panel1 = new TabPanel();
+		appendTabPanel(panel1, "First");
+
+		TabPanel panel2 = new PlainTabPanel();
+		appendTabPanel(panel2, "Second");
+
+		TabPanel panel3 = new TabPanel(new BluePlainTabPanelBottomAppearance());
+		appendTabPanel(panel3, "Third");
+
+		TabPanel panel4 = new PlainTabPanel(new GrayPlainTabPanelBottomAppearance());
+		appendTabPanel(panel4, "Fourth");
+	}
+
+	private void appendTabPanel(TabPanel panel, String text) {
+		panel.setCloseContextMenu(true);
+		SelectHandler error = new SelectHandler() {
+			@Override
+			public void onSelect(SelectEvent event) {
+				com.google.gwt.user.client.Window.alert("Button was clicked, shouldn't have been");
+			}
+		};
+		panel.add(new TextButton(text, error), new TabItemConfig(text + " plain", true));
+		TabItemConfig config1 = new TabItemConfig();
+		config1.setClosable(true);
+
+		// Bug in GXT 3.0.1
+		//config1.setHTML(new SafeHtmlBuilder().appendHtmlConstant("<b>").appendEscaped(text + " bold").appendHtmlConstant("</b>").toSafeHtml());
+		config1.setHTML(SafeHtmlUtils.fromString(text + " bold"));
+		panel.add(new TextButton("bold", error), config1);
+		TabItemConfig config2 = new TabItemConfig();
+		config2.setClosable(true);
+//		config2.setHTML(new SafeHtmlBuilder().appendHtmlConstant("<i><span><span>").appendEscaped(text + " italic").appendHtmlConstant("</span></span></i>").toSafeHtml());
+		config2.setHTML(SafeHtmlUtils.fromString(text + " italic"));
+		panel.add(new TextButton("italic", error), config2);
+		panel.setPixelSize(400, 200);
+		RootPanel.get().add(panel);
 	}
 }

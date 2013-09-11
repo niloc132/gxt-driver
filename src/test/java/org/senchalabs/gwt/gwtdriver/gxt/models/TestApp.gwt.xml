@@ -22,6 +22,10 @@
 <module rename-to="app">
 
     <inherits name="com.sencha.gxt.ui.GXT"/>
+
+    <!-- turning on both themes to allow verification that theme doesn't matter -->
+    <inherits name="com.sencha.gxt.theme.blue.Blue" />
+    <inherits name="com.sencha.gxt.theme.gray.Gray" />
     <inherits name="org.senchalabs.gwt.gwtdriver.gxt.TestableGXT" />
 
     <entry-point class='org.senchalabs.gwt.gwtdriver.gxt.models.client.App'/>
