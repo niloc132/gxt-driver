@@ -31,12 +31,46 @@ public class MenuBarTest extends BaseTest {
 	}
 
 	@Test
-	public void testClick() throws Exception {
+	public void testClick() {
 		MenuBar menuBar = GwtWidget.find(MenuBar.class, driver).withItem("File").done();
+
+		try {
+			menuBar.click("None");
+			Assert.fail();
+		} catch (Exception ex) {
+			// expected error, doesn't exist
+		}
 
 		Menu editMenu = menuBar.click("Edit");
 
-		Assert.assertNotNull(editMenu);
+		assert editMenu != null;
+	}
+	@Test
+	public void testHover() throws Exception {
+		MenuBar menuBar = GwtWidget.find(MenuBar.class, driver).withItem("File").done();
 
+		Menu fileMenu = menuBar.click("File");
+
+		//TODO hover over something else first, looks like 3.0.1 bug?
+		fileMenu.mouseOver("Open...");
+
+		try {
+			fileMenu.mouseOver("Missing");
+			Assert.fail();
+		} catch (Exception ex) {
+			// expected error, doesn't exist
+		}
+
+		Menu newMenu = fileMenu.mouseOver("New");
+
+		assert newMenu != null;
+
+		try {
+			newMenu.click("Uh-uh");
+			Assert.fail();
+		} catch (Exception ex) {
+			// expected error, doesn't exist
+		}
+		newMenu.click("Database");
 	}
 }

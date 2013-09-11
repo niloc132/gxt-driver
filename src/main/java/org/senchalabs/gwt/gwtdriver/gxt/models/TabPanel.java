@@ -35,13 +35,6 @@ import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: colin
- * Date: 8/29/13
- * Time: 6:38 PM
- * To change this template use File | Settings | File Templates.
- */
 @ForWidget(com.sencha.gxt.widget.core.client.TabPanel.class)
 public class TabPanel extends GwtWidget<TabPanelFinder> {
 

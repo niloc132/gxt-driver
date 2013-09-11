@@ -27,11 +27,13 @@ import org.openqa.selenium.WebElement;
 import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
+import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
 /**
  *
  */
+@ForWidget(com.sencha.gxt.widget.core.client.menu.MenuBar.class)
 public class MenuBar extends GwtWidget<MenuBar.MenuBarFinder> {
 
 	public MenuBar(WebDriver driver, WebElement element) {
