@@ -25,6 +25,8 @@ import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.sencha.gxt.core.client.ToStringValueProvider;
+import com.sencha.gxt.data.shared.LabelProvider;
+import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.theme.blue.client.tabs.BluePlainTabPanelBottomAppearance;
@@ -36,6 +38,8 @@ import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
+import com.sencha.gxt.widget.core.client.form.ComboBox;
+import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuBar;
 import com.sencha.gxt.widget.core.client.menu.MenuBarItem;
@@ -63,6 +67,9 @@ public class App implements EntryPoint {
 				break;
 			case "tabPanel":
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::tabPanel()();
+				break;
+			case "combo":
+				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::combo()();
 				break;
 			default:
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::error(Ljava/lang/String;)(key);
@@ -196,5 +203,25 @@ public class App implements EntryPoint {
 		panel.add(new TextButton("italic", error), config2);
 		panel.setPixelSize(400, 200);
 		RootPanel.get().add(panel);
+	}
+
+	private void combo() {
+		ComboBox<String> c = new ComboBox<String>(new ListStore<String>(new ModelKeyProvider<String>() {
+			@Override
+			public String getKey(String item) {
+				return item;
+			}
+		}), new LabelProvider<String>() {
+			@Override
+			public String getLabel(String item) {
+				return item;
+			}
+		});
+		c.getStore().add("One");
+		c.getStore().add("Two");
+		c.getStore().add("Three");
+		c.getStore().add("Four");
+
+		RootPanel.get().add(new FieldLabel(c, "ComboBox"));
 	}
 }

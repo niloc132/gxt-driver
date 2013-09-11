@@ -21,7 +21,9 @@ package org.senchalabs.gwt.gwtdriver.gxt.client;
  */
 
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Element;
 import com.sencha.gxt.core.client.dom.XElement;
+import com.sencha.gxt.widget.core.client.ListView;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import org.senchalabs.gwt.gwtdriver.client.SeleniumExporter.Method;
 import org.senchalabs.gwt.gwtdriver.client.SeleniumExporter.MethodsFor;
@@ -33,4 +35,14 @@ public class ComboBoxClientMethods {
 	public void clickTrigger(XElement parent) {
 		((ComboBox<?>)DOM.getEventListener(parent)).expand();
 	}
+	@Method("getListView")
+	public Element getListView(Element parent) {
+		ComboBox<?> combo = (ComboBox<?>) DOM.getEventListener(parent);
+		if (!combo.isExpanded()) {
+			return null;
+		}
+		ListView<?,?> listView = combo.getListView();
+		return listView == null ? null : listView.getElement();
+	}
+
 }

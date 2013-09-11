@@ -43,6 +43,10 @@ public class Field extends GwtWidget<FieldFinder> {
 		getElement().findElement(By.tagName("input")).sendKeys(keys);
 	}
 
+	public String getValue() {
+		return getElement().findElement(By.tagName("input")).getAttribute("value");
+	}
+
 	public static class FieldFinder extends GwtWidgetFinder<Field> {
 		private String text;
 		public FieldFinder withText(String text) {

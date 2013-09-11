@@ -20,11 +20,17 @@ package org.senchalabs.gwt.gwtdriver.gxt.models;
  * #L%
  */
 
+import com.google.common.base.Function;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.senchalabs.gwt.gwtdriver.invoke.ClientMethods;
 import org.senchalabs.gwt.gwtdriver.invoke.ClientMethodsFactory;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
+
+import java.util.concurrent.TimeUnit;
 
 @ForWidget(com.sencha.gxt.widget.core.client.form.ComboBox.class)
 public class ComboBox extends Field {
@@ -38,16 +44,42 @@ public class ComboBox extends Field {
 		methods.clickTrigger(getElement());
 	}
 	
-	public ListView getListView() {
-		return null;
+	public ListView getDropDown() {
+		WebElement listView = methods.getListView(getElement());
+		if (listView == null) {
+			throw new NoSuchElementException("ComboBox doesn't appear to be expanded");
+		}
+		//TODO cache this for faster future lookups
+		return new ListView(getDriver(), listView);
+	}
+
+	public ListView waitForDropDown(long duration, TimeUnit unit) {
+		return new FluentWait<WebDriver>(getDriver())
+				.withTimeout(duration, unit)
+				.ignoring(NotFoundException.class)
+				.until(new Function<WebDriver, ListView>() {
+					@Override
+					public ListView apply(WebDriver webDriver) {
+						return getDropDown();
+					}
+				});
+	}
+	public ListView waitForDropDown() {
+		return waitForDropDown(2, TimeUnit.SECONDS);
 	}
 
 	public interface ComboBoxMethods extends ClientMethods {
 		/**
-		 * Not a real click, but forces the combo box to expand.
-		 * @param parent
+		 * Not a real click, but forces the combo box to expand, letting the client implementation
+		 * worry about the appearance details.
 		 */
 		void clickTrigger(WebElement parent);
+
+		/**
+		 * Gets the element that represents the listview, provided the combobox is expanded, without
+		 * resorting to the expensive search for the popup. Returns null if not expanded.
+		 */
+		WebElement getListView(WebElement parent);
 	}
 
 }

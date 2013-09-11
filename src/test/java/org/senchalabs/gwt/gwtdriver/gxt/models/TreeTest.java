@@ -27,13 +27,6 @@ import org.openqa.selenium.support.pagefactory.ByChained;
 import org.senchalabs.gwt.gwtdriver.by.ByWidget;
 import org.senchalabs.gwt.gwtdriver.gxt.models.Tree.Item;
 
-/**
- * Created with IntelliJ IDEA.
- * User: colin
- * Date: 8/29/13
- * Time: 4:41 PM
- * To change this template use File | Settings | File Templates.
- */
 public class TreeTest extends BaseTest {
 
 	@Override

@@ -20,23 +20,35 @@ package org.senchalabs.gwt.gwtdriver.gxt.models;
  * #L%
  */
 
-import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
 
-public class MenuBarTest extends BaseTest {
+public class ComboBoxTest extends BaseTest {
 	@Override
 	protected String getScenarioName() {
-		return "menubar";
+		return "combo";
 	}
 
 	@Test
-	public void testClick() throws Exception {
-		MenuBar menuBar = GwtWidget.find(MenuBar.class, driver).withItem("File").done();
+	public void testAutoComplete() throws Exception {
+		//TODO work on these generics
+		ComboBox c = GwtWidget.find(Field.class, driver).withLabel("ComboBox").done().as(ComboBox.class);
 
-		Menu editMenu = menuBar.click("Edit");
+		c.sendKeys("th");
+		c.waitForDropDown();
+		c.sendKeys(Keys.RETURN);
 
-		Assert.assertNotNull(editMenu);
+		assert c.getValue().equals("Three") : c.getValue();
+	}
 
+	@Test
+	public void testExpandButton() {
+		ComboBox c = GwtWidget.find(Field.class, driver).withLabel("ComboBox").done().as(ComboBox.class);
+
+		c.clickTrigger();
+		c.getDropDown().clickItemWithText("Two");
+
+		assert c.getValue().equals("Two") : c.getValue();
 	}
 }
