@@ -22,6 +22,7 @@ package org.senchalabs.gwt.gwtdriver.gxt.models.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.sencha.gxt.core.client.ToStringValueProvider;
@@ -40,6 +41,8 @@ import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
+import com.sencha.gxt.widget.core.client.info.DefaultInfoConfig;
+import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuBar;
 import com.sencha.gxt.widget.core.client.menu.MenuBarItem;
@@ -70,6 +73,9 @@ public class App implements EntryPoint {
 				break;
 			case "combo":
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::combo()();
+				break;
+			case "info":
+				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::info()();
 				break;
 			default:
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::error(Ljava/lang/String;)(key);
@@ -223,5 +229,29 @@ public class App implements EntryPoint {
 		c.getStore().add("Four");
 
 		RootPanel.get().add(new FieldLabel(c, "ComboBox"));
+	}
+
+	private void info() {
+		Info.display(makeConfig("Initial message", "First!"));
+
+		new Timer() {
+			int count = 1;
+			@Override
+			public void run() {
+				if (count == 6) {
+					return;
+				}
+				Info.display(makeConfig("Message #" + count, "test" + count));
+
+				count++;
+				schedule(100);
+			}
+		}.schedule(100);
+	}
+
+	private DefaultInfoConfig makeConfig(String title, String message) {
+		DefaultInfoConfig config = new DefaultInfoConfig(title, message);
+		config.setDisplay(10000);
+		return config;
 	}
 }
