@@ -22,8 +22,11 @@ package org.senchalabs.gwt.gwtdriver.gxt.models;
 
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.net.NetworkUtils;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -32,16 +35,19 @@ public abstract class BaseTest {
 
 	@Before
 	public void startBrowser() {
-		driver = new FirefoxDriver();
+		String url = System.getProperty("webdriver.remote.server");
+		Capabilities c = DesiredCapabilities.internetExplorer();
+		driver = new RemoteWebDriver(c);
+//		driver = new FirefoxDriver();
 		driver.manage().timeouts().setScriptTimeout(1000, TimeUnit.MILLISECONDS);
 
-		driver.get("http://localhost:9080/app/?"+getScenarioName());
+		driver.get("http://"+new NetworkUtils().getNonLoopbackAddressOfThisMachine()+":9080/app/index.html?"+getScenarioName());
 	}
 
 	protected abstract String getScenarioName();
 
 	@After
 	public void stopBrowser() {
-		driver.close();
+		driver.quit();
 	}
 }

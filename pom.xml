@@ -215,8 +215,7 @@
 				<configuration>
 					<excludes>
 						<!-- exclude the integration tests below -->
-						<exclude>**/*Test.java
-						</exclude>
+						<exclude>**/*Test.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -304,6 +303,11 @@
 	<profiles>
 		<profile>
 			<id>integration-test</id>
+			<activation>
+				<property>
+					<name>webdriver.remote.server</name>
+				</property>
+			</activation>
 			<dependencies>
 				<!-- TODO should be test scoped, but gwt:compile only works with
 				  compile scope -->
@@ -429,8 +433,7 @@
 										<exclude>none</exclude>
 									</excludes>
 									<includes>
-										<include>**/*Test.java
-										</include>
+										<include>**/*Test.java</include>
 									</includes>
 								</configuration>
 							</execution>
