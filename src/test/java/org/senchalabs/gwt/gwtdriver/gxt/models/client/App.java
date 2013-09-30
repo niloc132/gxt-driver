@@ -30,6 +30,10 @@ import com.sencha.gxt.data.shared.LabelProvider;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.TreeStore;
+import com.sencha.gxt.dnd.core.client.DND.Feedback;
+import com.sencha.gxt.dnd.core.client.DND.Operation;
+import com.sencha.gxt.dnd.core.client.TreeDragSource;
+import com.sencha.gxt.dnd.core.client.TreeDropTarget;
 import com.sencha.gxt.theme.blue.client.tabs.BluePlainTabPanelBottomAppearance;
 import com.sencha.gxt.theme.gray.client.tabs.GrayPlainTabPanelBottomAppearance;
 import com.sencha.gxt.widget.core.client.PlainTabPanel;
@@ -76,6 +80,9 @@ public class App implements EntryPoint {
 				break;
 			case "info":
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::info()();
+				break;
+			case "treednd":
+				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::treednd()();
 				break;
 			default:
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::error(Ljava/lang/String;)(key);
@@ -253,5 +260,31 @@ public class App implements EntryPoint {
 		DefaultInfoConfig config = new DefaultInfoConfig(title, message);
 		config.setDisplay(10000);
 		return config;
+	}
+
+	private void treednd() {
+		TreeStore<String> store = new TreeStore<String>(new ModelKeyProvider<String>() {
+			@Override
+			public String getKey(String item) {
+				return item;
+			}
+		});
+		store.add("root");
+		store.add("root", "foo");
+		store.add("foo", "bar");
+		store.add("root", "baz");
+		store.add("other root");
+
+		Tree<String, String> tree = new Tree<String, String>(store, new ToStringValueProvider<String>());
+
+		tree.setPixelSize(1000, 1000);
+
+		TreeDragSource<String> source = new TreeDragSource<String>(tree);
+		TreeDropTarget<String> target = new TreeDropTarget<String>(tree);
+		target.setAllowSelfAsSource(true);
+		target.setFeedback(Feedback.BOTH);
+		target.setOperation(Operation.MOVE);
+
+		RootPanel.get().add(tree);
 	}
 }
