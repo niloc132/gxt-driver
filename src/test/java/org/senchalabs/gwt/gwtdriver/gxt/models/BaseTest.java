@@ -36,7 +36,7 @@ public abstract class BaseTest {
 	@Before
 	public void startBrowser() {
 		String url = System.getProperty("webdriver.remote.server");
-		Capabilities c = DesiredCapabilities.internetExplorer();
+		Capabilities c = DesiredCapabilities.chrome();
 		driver = new RemoteWebDriver(c);
 //		driver = new FirefoxDriver();
 		driver.manage().timeouts().setScriptTimeout(1000, TimeUnit.MILLISECONDS);
