@@ -47,7 +47,7 @@ public class Menu extends GwtWidget<MenuFinder> {
 			return atDepth(0);
 		}
 		public MenuFinder atDepth(int depth) {
-			this.depth = 0;
+			this.depth = depth;
 			return this;
 		}
 		@Override
