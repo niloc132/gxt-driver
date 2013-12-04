@@ -20,57 +20,44 @@ package org.senchalabs.gwt.gwtdriver.gxt.models;
  * #L%
  */
 
-import com.sencha.gxt.widget.core.client.Header;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.senchalabs.gwt.gwtdriver.by.ByNearestWidget;
 import org.senchalabs.gwt.gwtdriver.by.ByWidget;
 import org.senchalabs.gwt.gwtdriver.by.FasterByChained;
-import org.senchalabs.gwt.gwtdriver.gxt.models.Panel.PanelFinder;
+import org.senchalabs.gwt.gwtdriver.gxt.models.FieldSet.FieldSetFinder;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidget.ForWidget;
 import org.senchalabs.gwt.gwtdriver.models.GwtWidgetFinder;
 
-import com.sencha.gxt.widget.core.client.ContentPanel;
+@ForWidget(com.sencha.gxt.widget.core.client.form.FieldSet.class)
+public class FieldSet extends GwtWidget<FieldSetFinder> {
 
-@ForWidget(ContentPanel.class)
-public class Panel extends GwtWidget<PanelFinder> {
-
-	public Panel(WebDriver driver, WebElement element) {
+	public FieldSet(WebDriver driver, WebElement element) {
 		super(driver, element);
 	}
-	
-	public WebElement getHeaderElement() {
-		return getElement().findElement(new FasterByChained(By.xpath(".//*"), 
-				new ByWidget(getDriver(), Header.class)));
-	}
 
-	public boolean isCollapsed() {
-		return getHeaderElement().getSize().getHeight() == getElement().getSize().getHeight();
-	}
-	
-	//todo tools, buttons
-	//todo children
+	public static class FieldSetFinder extends GwtWidgetFinder<FieldSet> {
 
-	public static class PanelFinder extends GwtWidgetFinder<Panel> {
 		private String heading;
-		public PanelFinder withHeading(String heading) {
+		public FieldSetFinder withHeading(String heading) {
 			this.heading = heading;
 			return this;
 		}
+
 		@Override
-		public Panel done() {
-			WebElement elt = this.elt;
+		public FieldSet done() {
+			WebElement element = elt;
 			if (heading != null) {
-				String escapedString = escapeToString(heading);
-				elt = elt.findElement(new FasterByChained(
-						By.xpath(".//*[contains(text(), "+escapedString+")]"),
-						new ByNearestWidget(driver),//find the containing widget
-						new ByWidget(driver, Header.class),//make sure it is a header
-						new ByNearestWidget(driver, ContentPanel.class)));//find the wrapping container
+				String escaped = escapeToString(heading);
+				element = element.findElement(new FasterByChained(
+						By.xpath(".//*[contains(text(), " + escaped + ")]"),
+						new ByNearestWidget(driver),
+						new ByWidget(driver, com.sencha.gxt.widget.core.client.form.FieldSet.class)
+				));
 			}
-			return new Panel(driver, elt);
+			return new FieldSet(driver, element);
 		}
 	}
 }

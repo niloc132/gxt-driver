@@ -36,6 +36,7 @@ import com.sencha.gxt.dnd.core.client.TreeDragSource;
 import com.sencha.gxt.dnd.core.client.TreeDropTarget;
 import com.sencha.gxt.theme.blue.client.tabs.BluePlainTabPanelBottomAppearance;
 import com.sencha.gxt.theme.gray.client.tabs.GrayPlainTabPanelBottomAppearance;
+import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.PlainTabPanel;
 import com.sencha.gxt.widget.core.client.TabItemConfig;
 import com.sencha.gxt.widget.core.client.TabPanel;
@@ -45,6 +46,7 @@ import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
+import com.sencha.gxt.widget.core.client.form.FieldSet;
 import com.sencha.gxt.widget.core.client.info.DefaultInfoConfig;
 import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.menu.Menu;
@@ -83,6 +85,12 @@ public class App implements EntryPoint {
 				break;
 			case "treednd":
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::treednd()();
+				break;
+			case "fieldset":
+                this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::fieldset()();
+				break;
+			case "panel":
+                this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::panel()();
 				break;
 			default:
 				this.@org.senchalabs.gwt.gwtdriver.gxt.models.client.App::error(Ljava/lang/String;)(key);
@@ -286,5 +294,29 @@ public class App implements EntryPoint {
 		target.setOperation(Operation.MOVE);
 
 		RootPanel.get().add(tree);
+	}
+
+	private void fieldset() {
+		FieldSet fieldset1 = new FieldSet();
+		fieldset1.setHeadingText("a boring heading");
+		fieldset1.setWidget(new Label("reused text"));
+
+		FieldSet fieldset2 = new FieldSet();
+		fieldset2.setHeadingText("reused heading");
+
+		RootPanel.get().add(fieldset1);
+		RootPanel.get().add(fieldset2);
+	}
+
+	private void panel() {
+		ContentPanel panel1 = new ContentPanel();
+		panel1.setHeadingText("a boring heading");
+		panel1.setWidget(new Label("reused text"));
+
+		ContentPanel panel2 = new ContentPanel();
+		panel2.setHeadingText("reused heading");
+
+		RootPanel.get().add(panel1);
+		RootPanel.get().add(panel2);
 	}
 }
