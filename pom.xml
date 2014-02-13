@@ -29,7 +29,7 @@
 		</license>
 	</licenses>
 	<properties>
-		<selenium.version>2.35.0</selenium.version>
+		<selenium.version>2.39.0</selenium.version>
 		<gwt.version>2.5.1</gwt.version>
 		<gxt.version>3.0.1</gxt.version>
 
